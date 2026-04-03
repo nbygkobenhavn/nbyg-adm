@@ -1,0 +1,19 @@
+{
+  "name": "nbyg-content-uploader",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "import-blog": "tsx importBlogFromStructuredRaw.ts",
+    "import-blog:dry": "tsx importBlogFromStructuredRaw.ts --dry-run"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.29.1",
+    "dotenv": "^16.4.7",
+    "html-entities": "^2.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.8"
+  }
+}

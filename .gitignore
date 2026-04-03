@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # Dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.js
 
@@ -12,18 +12,35 @@
 /.sanity
 
 # Logs
-/logs
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # Coverage directory used by testing tools
 /coverage
 
+# Env / secrets (keep .env.example committed if you document vars)
+.env
+.env.*
+!.env.example
+
 # Misc
 .DS_Store
+Thumbs.db
 *.pem
 
-# Typescript
+# TypeScript
 *.tsbuildinfo
 
 # Dotenv and similar local-only files
 *.local
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

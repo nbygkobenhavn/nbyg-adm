@@ -138,6 +138,10 @@ export const blogPost = defineType({
           type: 'table',
           title: 'Таблиця',
         },
+        {
+          type: 'gallerySection',
+          title: 'Галерея',
+        },
       ],
     }),
     // FAQ секція
