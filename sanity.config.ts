@@ -31,6 +31,18 @@ export default defineConfig({
                   ]),
               ),
             S.listItem()
+              .title('Сторінки проєктів')
+              .schemaType('projectPage')
+              .child(
+                S.documentList()
+                  .title('Сторінки проєктів')
+                  .filter('_type == "projectPage"')
+                  .defaultOrdering([
+                    {field: 'menuOrder', direction: 'asc'},
+                    {field: 'title', direction: 'asc'},
+                  ]),
+              ),
+            S.listItem()
               .title('Статті блогу')
               .schemaType('blogPost')
               .child(
