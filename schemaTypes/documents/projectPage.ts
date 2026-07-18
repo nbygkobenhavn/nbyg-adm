@@ -31,6 +31,39 @@ export const projectPage = defineType({
       },
     }),
     defineField({
+      name: 'parent',
+      type: 'reference',
+      title: 'Батьківський проєкт',
+      description: 'Оберіть батьківський проєкт, щоб створити один рівень вкладеності (підсторінку)',
+      to: [{type: 'projectPage'}],
+      validation: (rule) =>
+        rule.custom(async (parentRef, context) => {
+          if (!parentRef?._ref) {
+            return true
+          }
+
+          const normalizeId = (id: string) => id.replace(/^drafts\./, '')
+          const currentId = context.document?._id ? normalizeId(context.document._id) : null
+          const parentId = normalizeId(parentRef._ref)
+
+          if (currentId && parentId === currentId) {
+            return 'Проєкт не може бути власним батьком'
+          }
+
+          const client = context.getClient({apiVersion: '2023-05-31'})
+          const parentDocument = await client.fetch(
+            `*[_type == "projectPage" && _id in [$parentId, "drafts." + $parentId]][0]{parent}`,
+            {parentId},
+          )
+
+          if (parentDocument?.parent?._ref) {
+            return 'Обраний проєкт вже має батьківський проєкт. Дозволено лише один рівень вкладеності.'
+          }
+
+          return true
+        }),
+    }),
+    defineField({
       name: 'menuOrder',
       type: 'number',
       title: 'Порядок у меню',
